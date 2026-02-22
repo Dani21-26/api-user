@@ -55,9 +55,10 @@ CREATE TABLE users (
 ```
 4. Configurar conexión a PostgreSQL
 
-Crea un archivo .env en la raíz del proyecto con tu conexión a PostgreSQL
+Crea un archivo .env en la raíz del proyecto con tu conexión a PostgreSQL y tu puerto para correr la app
 ```bash
 DATABASE_URL="postgresql://usuario:contraseña@localhost:5432/nombre_de_tu_db"
+PORT = tu puerto
 ```
 5. Ejecutar la aplicación en desarrollo
 ```bash
