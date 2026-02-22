@@ -7,7 +7,14 @@ export async function createUser(req, res) {
         if (!name || !email){
             return res.status(400).json({ error: "Datos incompletos"});
         }
-
+        //verificar que si el correo existe
+        const existing = await pool.query("SELECT id FROM users WHERE email = $1", 
+            [email]
+        );
+        if (existing.rows.length > 0) {
+            return res.status(409).json({ error: "El correo ya está registrado" });
+        }
+         //Crear Usuario
         const result = await pool.query(
             "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *",
             [name, email]
@@ -29,5 +36,3 @@ export async function getUsers(req, res){
         res.status(500).json({ error: "Error al obtener los usuarios"}); 
     }
 }
-
-
